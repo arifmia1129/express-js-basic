@@ -1,10 +1,17 @@
 const express = require("express");
+const morgan = require('morgan');
 
 const app = express();
 
+app.use(morgan('dev'));
+
 
 app.get('/about', (req, res) => {
-    res.send('<h1>This is a about page</h1>')
+    // res.send('<h1>This is a about page</h1>')
+    res.json({
+        success: true,
+        message: 'This is about page'
+    })
 })
 
 app.get('/help', (req, res) => {
