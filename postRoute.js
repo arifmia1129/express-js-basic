@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
+    const { category, filter, page } = req.query;
+    console.log(category, filter, page);
     res.send('Get all post')
 })
 
