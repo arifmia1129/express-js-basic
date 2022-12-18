@@ -16,7 +16,16 @@ const customMiddleware = (req, res, next) => {
     next();
 }
 
-app.use(customMiddleware);
+const tinyLogger = () => {
+    return (req, res, next) => {
+        console.log(`${req.method}-${req.url}`);
+        next();
+    }
+}
+
+const middleware = [customMiddleware, tinyLogger()];
+
+app.use(middleware);
 
 
 app.get('/about', morgan('dev'), (req, res) => {
