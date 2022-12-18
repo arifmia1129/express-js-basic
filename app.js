@@ -3,10 +3,10 @@ const morgan = require('morgan');
 
 const app = express();
 
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 
-app.get('/about', (req, res) => {
+app.get('/about', morgan('dev'), (req, res) => {
     // res.send('<h1>This is a about page</h1>')
     res.json({
         success: true,
