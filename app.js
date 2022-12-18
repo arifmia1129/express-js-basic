@@ -1,5 +1,7 @@
 const express = require("express");
 const morgan = require('morgan');
+const userRouter = require('./router');
+const postRouter = require('./postRoute');
 
 const app = express();
 
@@ -27,20 +29,9 @@ const middleware = [customMiddleware, tinyLogger()];
 
 app.use(middleware);
 
-const router = express.Router();
 
-router.get('/login', (req, res) => {
-    res.send('<h1>This is login route</h1>')
-})
-router.get('/logout', (req, res) => {
-    res.send('<h1>This is logout route</h1>')
-})
-router.get('/signup', (req, res) => {
-    res.send('<h1>This is signup route</h1>')
-})
-
-
-app.use('/user', router);
+app.use('/user', userRouter);
+app.use('/posts', postRouter);
 
 app.get('/about', morgan('dev'), (req, res) => {
     // res.send('<h1>This is a about page</h1>')
