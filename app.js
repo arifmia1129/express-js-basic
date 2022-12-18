@@ -6,6 +6,19 @@ const app = express();
 // app.use(morgan('dev'));
 
 
+const customMiddleware = (req, res, next) => {
+    if (req.url === '/help') {
+        return res.json({
+            success: false,
+            message: 'This page is blocked by admin'
+        })
+    }
+    next();
+}
+
+app.use(customMiddleware);
+
+
 app.get('/about', morgan('dev'), (req, res) => {
     // res.send('<h1>This is a about page</h1>')
     res.json({
