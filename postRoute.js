@@ -1,23 +1,12 @@
 const router = require('express').Router();
+const postController = require('./postController');
 
-router.get('/', (req, res) => {
-    const { category, filter, page } = req.query;
-    console.log(category, filter, page);
-    res.send('Get all post')
-})
+router.get('/', postController.getAllPost)
 
-router.get('/:postId', (req, res) => {
-    res.send('Your searching post id is:' + req.params.postId);
-})
+router.get('/:postId', postController.getSinglePost)
 
-router.post('/', (req, res) => {
-    res.send('Create a new post')
-})
-router.put('/:postId', (req, res) => {
-    res.send('Update a existing post' + req.params.postId)
-})
-router.delete('/:postId', (req, res) => {
-    res.send('Delete a existing post' + req.params.postId)
-})
+router.post('/', postController.createPost)
+router.put('/:postId', postController.updatePost)
+router.delete('/:postId', postController.deletePost)
 
 module.exports = router;
